@@ -16,13 +16,13 @@ function preloadDB() {
 
 const ioConfig = {
  cors: {
-  origin: "http://localhost:3000",
+  origin: "https://japl.vercel.app",
   methods: ["GET", "POST"],
  },
 };
 
 const corsConfig = {
- origin: ["http://localhost:3000"],
+ origin: ["https://japl.vercel.app"],
  credentials: true,
 };
 
