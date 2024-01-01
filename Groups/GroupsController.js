@@ -1,5 +1,5 @@
-const User = require("../Models/User");
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const User = require('../Models/User');
 
 class GroupController {
   async getGroups(req, res) {
@@ -10,6 +10,7 @@ class GroupController {
       res.status(400).json({ error: e });
     }
   }
+
   async getGroup(req, res) {
     try {
       const user = await User.findById(req.user.id);
@@ -18,6 +19,7 @@ class GroupController {
       res.status(400).json({ error: e });
     }
   }
+
   async getGroupNames(req, res) {
     try {
       const user = await User.findById(req.user.id);
@@ -26,6 +28,7 @@ class GroupController {
       res.status(400).json({ error: e });
     }
   }
+
   async createGroup(req, res) {
     try {
       const user = await User.findById(req.user.id);
@@ -33,27 +36,29 @@ class GroupController {
       user.save();
       return res.json(req.body);
     } catch (e) {
-      return res.status(400).json({ message: "collection creation error", errors: e });
+      return res.status(400).json({ message: 'collection creation error', errors: e });
     }
   }
+
   async deleteGroup(req, res) {
     try {
       const user = await User.findById(req.user.id);
 
-      let temp = [];
+      const temp = [];
       user.groups.forEach((group) => {
         if (group.id.toString() != req.query.id) {
           temp.push(group);
         }
       });
       user.groups = temp;
-      user.markModified("groups");
+      user.markModified('groups');
       user.save();
       return res.json(user.groups);
     } catch (e) {
       return res.status(400).json({ error: e });
     }
   }
+
   async updateGroup(req, res) {
     try {
       const user = await User.findById(req.user.id);
@@ -63,13 +68,14 @@ class GroupController {
           user.groups[i] = { ...req.body, id: req.query.id };
         }
       });
-      user.markModified("groups");
+      user.markModified('groups');
       user.save();
       return res.json(user.groups);
     } catch (e) {
       return res.status(400).json({ error: e });
     }
   }
+
   async addToGroup(req, res) {
     try {
       const user = await User.findById(req.user.id);
@@ -78,7 +84,7 @@ class GroupController {
           group.termins.push(req.body);
         }
       });
-      user.markModified("groups");
+      user.markModified('groups');
       user.save();
       return res.json({ message: user.groups });
     } catch (e) {

@@ -1,6 +1,6 @@
-const User = require("../Models/User");
-const Conversations = require("../Models/Conversations");
-const Message = require("../Models/Messages");
+const User = require('../Models/User');
+const Conversations = require('../Models/Conversations');
+const Message = require('../Models/Messages');
 
 class ConversationController {
   async newConversation(req, res) {
@@ -15,7 +15,7 @@ class ConversationController {
     });
 
     if (ConversationWithReceiverExist) {
-      let data = {
+      const data = {
         conversationId: SenderAndReceiveConversationId,
         sender: req.body.senderId,
         text: req.body.text,
@@ -36,7 +36,7 @@ class ConversationController {
       });
       try {
         const savedConversation = await newConversation.save();
-        let data = {
+        const data = {
           conversationId: savedConversation._id,
           sender: req.body.senderId,
           text: req.body.text,
@@ -50,6 +50,7 @@ class ConversationController {
       }
     }
   }
+
   async getConversationFriend(req, res) {
     try {
       const friend = await User.findById(req.query.friendId);
@@ -72,6 +73,7 @@ class ConversationController {
       res.status(400).json({ error: e });
     }
   }
+
   async getConversations(req, res) {
     try {
       const conversation = await Conversations.find({ members: { $in: [req.query.userId] } });
@@ -80,6 +82,7 @@ class ConversationController {
       res.status(400).json({ error: e });
     }
   }
+
   async getMessages(req, res) {
     try {
       const messages = await Message.find({ conversationId: req.query.conversationId });

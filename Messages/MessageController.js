@@ -1,4 +1,4 @@
-const Message = require("../Models/Messages");
+const Message = require('../Models/Messages');
 
 class MessageController {
   async newMessage(req, res) {

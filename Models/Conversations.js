@@ -1,10 +1,7 @@
-const { Schema, model, default: mongoose } = require("mongoose");
+const { Schema, model, default: mongoose } = require('mongoose');
 
 const Conversation = new mongoose.Schema({
-    members: {type:Array}
+  members: { type: Array },
 });
 
-
-
-
-module.exports = model('Conversation',Conversation)
+module.exports = model('Conversation', Conversation);
